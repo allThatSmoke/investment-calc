@@ -2,9 +2,7 @@ import { useState } from 'react';
 
 import Header from './components/Header'
 import UserInput from './components/UserInput'
-import Result from './components/Result'
-
-import { calculateInvestmentResults } from './util/investment';
+import Results from './components/Results'
 
 const INITIAL_PARAMS = {
 	initialInvestment: 10000,
@@ -21,6 +19,9 @@ function App() {
     duration: 10
   })
 
+  const inputIsValid = (investmentParams.duration >= 1);
+  
+
 	function handleChange(inputIdentifier, newValue){
 		setInvestmentParams((prevParams) => {
 			return {
@@ -30,15 +31,12 @@ function App() {
 		})
 	}
 
-  const investmentResultsArray = calculateInvestmentResults(investmentParams);  
-  console.log(investmentParams);
-  console.log(investmentResultsArray);
-
   return (
     <>
       <Header />
-      <UserInput handleChange={handleChange} investmentParams={investmentParams} />
-      <Result tableDataArray={investmentResultsArray}/>
+      <UserInput onChange={handleChange} investmentParams={investmentParams} />
+      {!inputIsValid && <p className="center">Please enter a duration greater than zero.</p>}
+      {inputIsValid && <Results userData={investmentParams}/>}
     </>
   )
 }
