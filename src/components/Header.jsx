@@ -1,4 +1,5 @@
-import headerImage from './assets/investment-calculator-logo.png'
+import headerImage from '../assets/investment-calculator-logo.png'
+<assets />
 
 export default function Header(){
 	return(
