@@ -1,23 +1,5 @@
-import { useState } from 'react';
-
-const INITIAL_PARAMS = {
-	initialInvestment: 10000,
-	annualInvestment: 1200,
-	expectedReturn: 6,
-	duration: 10
-}
-
-export default function UserInput(){
-	const [investmentParams, setInvestmentParams] = useState(INITIAL_PARAMS)
-
-	function handleChange(inputIdentifier, newValue){
-		setInvestmentParams((prevParams) => {
-			return {
-				...prevParams,
-				[inputIdentifier]: newValue
-			}
-		})
-	}
+export default function UserInput({handleChange, investmentParams}){
+	
 
 	return (
 		<>
@@ -29,7 +11,7 @@ export default function UserInput(){
 					  type="number" 
 					  required
 					  value={investmentParams.initialInvestment}
-					  onChange={(event)=>handleChange("initialInvestment", event.target.value)}>
+					  onChange={(event)=>handleChange("initialInvestment", event.target.valueAsNumber)}>
 					</input>
 				</p>
 				<p>
@@ -38,7 +20,7 @@ export default function UserInput(){
 					  type="number" 
 					  required
 					  value={investmentParams.annualInvestment}
-					  onChange={(event)=>handleChange("annualInvestment", event.target.value)}>
+					  onChange={(event)=>handleChange("annualInvestment", event.target.valueAsNumber)}>
 					</input>
 				</p>
 			</div>
@@ -50,7 +32,7 @@ export default function UserInput(){
 					  type="number"
 					  required
 					  value={investmentParams.expectedReturn}
-					  onChange={(event)=>handleChange("expectedReturn", event.target.value)}></input>
+					  onChange={(event)=>handleChange("expectedReturn", event.target.valueAsNumber)}></input>
 				</p>
 				<p>
 					<label>Duration</label>
@@ -58,15 +40,9 @@ export default function UserInput(){
 					  type="number" 
 					  required
 					  value={investmentParams.duration}
-					  onChange={(event)=>handleChange("duration", event.target.value)}></input>
+					  onChange={(event)=>handleChange("duration", event.target.valueAsNumber)}></input>
 				</p>
 			</div>
-		</section>
-		<section>
-			<p>Initial Investment Value: {investmentParams.initialInvestment}</p>
-			<p>Annual Investment Value: {investmentParams.annualInvestment}</p>
-			<p>Expected Return: {investmentParams.expectedReturn}</p>
-			<p>Duration: {investmentParams.duration}</p>
 		</section>
 		</>
 	)
